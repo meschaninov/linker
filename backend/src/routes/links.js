@@ -40,7 +40,9 @@ router.post('/', async (req, res) => {
       [slug, url, expiresAt, token]
     );
     const link = rows[0];
-    const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+    let baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+    if (!/^https?:\/\//i.test(baseUrl)) baseUrl = 'https://' + baseUrl;
+    baseUrl = baseUrl.replace(/\/+$/, '');
     res.status(201).json({
       slug: link.slug,
       shortUrl: `${baseUrl}/r/${link.slug}`,

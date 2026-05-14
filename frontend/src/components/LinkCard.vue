@@ -3,8 +3,8 @@
     <div class="card-top">
       <div class="card-urls">
         <div class="short-url-row">
-          <a :href="link.shortUrl" target="_blank" rel="noopener noreferrer" class="short-url" :class="{ 'short-url--expired': isExpired }">
-            {{ link.shortUrl.replace(/^https?:\/\//, '') }}
+          <a :href="safeShortUrl" target="_blank" rel="noopener noreferrer" class="short-url" :class="{ 'short-url--expired': isExpired }">
+            {{ safeShortUrl.replace(/^https?:\/\//, '') }}
           </a>
           <span v-if="isExpired" class="expired-badge">Истекла</span>
         </div>
@@ -84,6 +84,12 @@ defineEmits(['remove']);
 const isExpired = computed(() => {
   const exp = props.link.expiresAt || props.stats?.expiresAt;
   return exp ? new Date(exp) < new Date() : false;
+});
+
+const safeShortUrl = computed(() => {
+  const u = props.link.shortUrl || '';
+  if (/^https?:\/\//i.test(u)) return u;
+  return 'https://' + u.replace(/^\/+/, '');
 });
 
 const expiryLabel = computed(() => {

@@ -121,7 +121,7 @@
                   <div class="card-urls">
                     <div class="short-url-row">
                       <a
-                        :href="`/r/${link.slug}`"
+                        :href="`${origin}/r/${link.slug}`"
                         target="_blank"
                         class="short-url"
                         :class="{ 'short-url--expired': isExpired(link) }"
@@ -192,6 +192,7 @@ import { ref, onMounted } from 'vue';
 import { adminLogin, adminGetLinks, adminDeleteLink } from '../api.js';
 
 const SS_KEY = 'linker-admin-token';
+const origin = window.location.origin;
 
 const token    = ref(null);
 const password = ref('');
