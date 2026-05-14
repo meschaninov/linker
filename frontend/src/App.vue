@@ -1,5 +1,6 @@
 <template>
-  <NotFound v-if="isNotFound" />
+  <AdminPanel v-if="isAdmin" />
+  <NotFound v-else-if="isNotFound" />
   <div v-else class="layout">
     <header class="header">
       <div class="header-inner">
@@ -119,8 +120,10 @@ import { ref, onMounted } from 'vue';
 import CreateLink from './components/CreateLink.vue';
 import LinkCard from './components/LinkCard.vue';
 import NotFound from './components/NotFound.vue';
+import AdminPanel from './components/AdminPanel.vue';
 import { fetchStats, deleteLink } from './api.js';
 
+const isAdmin = window.location.pathname === '/admin';
 const isNotFound = window.location.pathname === '/not-found';
 const teamOpen = ref(false);
 

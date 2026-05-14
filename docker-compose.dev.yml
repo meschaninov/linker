@@ -22,6 +22,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile.dev
     restart: unless-stopped
+    env_file: .env
     environment:
       DATABASE_URL: postgres://shortner:shortner@db:5432/shortner
       BASE_URL: http://localhost:5173

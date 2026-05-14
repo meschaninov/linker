@@ -3,6 +3,7 @@ import cors from 'cors';
 import pool from './db.js';
 import linksRouter from './routes/links.js';
 import redirectRouter from './routes/redirect.js';
+import adminRouter from './routes/admin.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/links', linksRouter);
+app.use('/api/admin', adminRouter);
 app.use('/r', redirectRouter);
 
 async function start() {
