@@ -78,7 +78,6 @@ docker-compose up -d --build
 ## 🗄️ База данных
 
 ```sql
--- Ссылки
 CREATE TABLE links (
   id           SERIAL PRIMARY KEY,
   slug         VARCHAR(50) UNIQUE NOT NULL,
@@ -88,7 +87,6 @@ CREATE TABLE links (
   created_at   TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Переходы
 CREATE TABLE visits (
   id         SERIAL PRIMARY KEY,
   link_id    INTEGER REFERENCES links(id) ON DELETE CASCADE,
